@@ -1,10 +1,10 @@
-import {Router} from 'express'
-
-const routes = new Router()
-
-routes.get('/', (request,response) =>{
-    return response.status(200).json({message:'hello world'})
-})
+import { Router } from 'express';
+import UserController from './app/controllers/UserController';
 
 
-export default routes
+const routes = new Router();
+
+routes.get('/user',UserController.store) 
+
+
+export default routes;
