@@ -1,10 +1,27 @@
 import User from '../models/User';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
+import * as Yup from 'yup';
 
 class UserController {
   async store(request, response) {
-    const { name, email, password, admin } = request.body;
+    const schema = Yup.object({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password_hash: Yup.string().required().min(6),
+      admin: Yup.boolean(),
+    });
+
+try{
+   schema.validateSync(request.body,{abortEarly:false}) 
+  
+  } catch(err){
+    return response.status(400).json({ error: err.errors });
+  }
+}
+
+
+const { name, email, password, admin } = request.body;
 
     const password_hash = await bcrypt.hash(password, 8);
 
@@ -17,7 +34,6 @@ class UserController {
     });
 
     return response.status(201).json(user);
-  }
-}
 
 export default new UserController();
+  
