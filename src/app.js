@@ -1,7 +1,7 @@
 import express from 'express';
 import routes from './routes';
 import './database';
-import {resolve} from 'node: path'
+import {resolve} from 'node:path';
 
 
 class App {

@@ -9,6 +9,7 @@ class Product extends Model {
         path: Sequelize.STRING,
         url: {
           type: Sequelize.VIRTUAL,
+          
           get() {
             return `https://localhost:3001/product-file/${this.path}`;
           },
