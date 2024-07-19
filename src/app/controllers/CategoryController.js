@@ -6,7 +6,7 @@ class CategoryController {
   async store(request, response) {
     const schema = Yup.object({
       name: Yup.string().required(),
-     
+
     });
 
     try {
@@ -14,21 +14,28 @@ class CategoryController {
     } catch (err) {
       return response.status(400).json({ error: err.errors });
     }
-   
-    const { name} = request.body;
 
-    const Category = await Category.create({
-      name,
+    const { name } = request.body
+
+    const categoryExists = await Category.findOne({
+      where: {
+        name,
+      },
     })
-     
 
-    return response.status(201).json({ Category })
-  
+    if (categoryExists) {
+      return response.status(400).json({ error: 'Category already exists' })
+    }
+
+    const { id } = await Category.create({ name })
+
+    return response.json({ name, id })
+
     };
 
 async index(request,response) {
-   const categories= await Category.findAll();
-   
+   const categories = await Category.findAll();
+
 
    return response.json(categories);
 

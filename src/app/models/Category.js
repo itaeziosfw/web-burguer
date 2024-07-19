@@ -4,15 +4,12 @@ class Category extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-       
-          
-         
-        
       },
       {
         sequelize,
       },
     );
+    return this
   }
 }
 
