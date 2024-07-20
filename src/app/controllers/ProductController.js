@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Product from '../models/Product';
+import Product from '../models/Products';
 
 
 class ProductController {
