@@ -11,6 +11,7 @@ class UserController {
       password: Yup.string().required().min(6),
       admin: Yup.boolean(),
     });
+    
 
     try {
       schema.validateSync(request.body, { abortEarly: false });
