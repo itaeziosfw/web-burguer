@@ -4,8 +4,9 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import ProductController from './app/controllers/ProductController';
-import authMiddlewares from './middlewares/auth';
+import authMiddlewares from './app/middlewares/auth';
 import CategoryController from './app/controllers/CategoryController';
+import OrderController from './app/controllers/OrderController';
 
 
 const routes = new Router();
@@ -25,6 +26,9 @@ routes.get('/products',ProductController.index);
 routes.post('/categories', CategoryController.store);
 
 routes.get('/categories',CategoryController.index);
+
+routes.post('/ordens', OrderController.store);
+
 
 export default routes;
 
