@@ -40,7 +40,7 @@ async index(request,response){
   ],
    });
    
-   //console.log ({userId:request.userId})//
+  
 
    return response.json(products);
 
