@@ -60,7 +60,7 @@ class OrderController {
 
    const order = {
     user :{
-        id:request.UserId,
+        id:request.userId,
         name: request.userName
     },
     products:formattedProducts,
@@ -71,6 +71,34 @@ class OrderController {
 
     return response.status(201).json({ createdOrder });
   }
+async index (request,response){
+  const orders = await Order.find();
+
+  return response.json(orders);
+}
+
+async update (request,response) {
+  const schema =Yup.object({
+    status: Yup.string().required(),
+  });
+  try {
+    schema.validateSync(request.body, { abortEarly: false });
+  } catch (err) {
+    return response.status(400).json({ error: err.errors });
+  }
+
+  const {id} = request.parans;
+  const {status} =request.body;
+
+
+
+  await Order.updateOne({_id:id},{status});
+
+
+  return response.status(200).json({message:'Status do Pedido Atualizado'});
+
+}
+
 }
 
    
