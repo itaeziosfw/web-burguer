@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import  Order from '../schemas/Order';
 import Product from '../models/Products';
 import Category from '../models/Category';
+import User from '../models/User';
 
 
 class OrderController {
@@ -86,6 +87,13 @@ async update (request,response) {
   } catch (err) {
     return response.status(400).json({ error: err.errors });
   }
+
+  const isAdmin = await User.findByPk(request.userId);
+
+  if (!isAdmin.admin) {
+    return response.status(401).json({ error: 'Only admin users can create categories' });
+  }
+
 
   const {id} = request.parans;
   const {status} =request.body;
