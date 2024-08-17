@@ -4,7 +4,7 @@ module.exports = {
   host: 'localhost',
   username: 'postgres',
   password: 'postgres',
-  database: 'web-burg',
+  database: 'wweb-bug',
 
   define: {
     timestamps: true,
